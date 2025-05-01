@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediPlus - Online Pharmacy</title>
+</head>
+<style>
+    /* Global Styles */
+:root {
+    --primary-color: #4CAF50;
+    --secondary-color: #2E7D32;
+    --accent-color: #8BC34A;
+    --dark-color: #1B5E20;
+    --light-color: #C8E6C9;
+    --text-color: #333;
+    --light-text: #f5f5f5;
+    --background-color: #f9f9f9;
+    --card-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Header Styles */
+header {
+    background-color: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo i {
+    font-size: 2rem;
+    color: var(--primary-color);
+}
+
+.logo h1 {
+    font-size: 1.5rem;
+    color: var(--dark-color);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+nav a:hover {
+    color: var(--primary-color);
+}
+
+nav a.active {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+#loginBtn {
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+}
+
+#loginBtn:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+#signupBtn {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+#signupBtn:hover {
+    background-color: var(--secondary-color);
+}
+
+.cart-icon {
+    position: relative;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+.cart-count {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.user-profile i {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.user-profile .username {
+    font-weight: 500;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    color: var(--light-text);
+    padding: 0 5rem;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.shop-now {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+}
+
+.shop-now:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Medicines Section */
+.medicines-section {
+    padding: 4rem 2rem;
+}
+
+.medicines-section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: var(--dark-color);
+}
+
+.search-bar {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-bar input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px 0 0 4px;
+    font-size: 1rem;
+}
+
+.search-bar button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0 1.5rem;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    background-color: var(--secondary-color);
+}
+
+.filter-options {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.filter-options select {
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.medicines-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.medicine-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+}
+
+.medicine-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.medicine-img {
+    height: 200px;
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.medicine-img i {
+    font-size: 3rem;
+    color: var(--primary-color);
+}
+
+.medicine-info {
+    padding: 1.5rem;
+}
+
+.medicine-info h3 {
+    margin-bottom: 0.5rem;
+    color: var(--dark-color);
+}
+
+.medicine-info p {
+    color: #666;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.medicine-price {
+    font-weight: bold;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.add-to-cart {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.6rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.add-to-cart:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Categories Section */
+.categories-section {
+    padding: 4rem 2rem;
+    background-color: #f5f5f5;
+}
+
+.categories-section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: var(--dark-color);
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 2rem;
+    padding: 1rem;
+}
+
+.category-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 2rem 1rem;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.category-card i {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.category-card:hover i {
+    color: white;
+}
+
+.category-card h3 {
+    font-size: 1.2rem;
+}
+
+/* Footer */
+footer {
+    background-color: var(--dark-color);
+    color: var(--light-text);
+    padding: 3rem 2rem 1rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-section h3 {
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-section ul li a {
+    color: var(--light-text);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-section ul li a:hover {
+    color: var(--accent-color);
+}
+
+.footer-section p {
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-icons a {
+    color: var(--light-text);
+    font-size: 1.5rem;
+    transition: var(--transition);
+}
+
+.social-icons a:hover {
+    color: var(--accent-color);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+}
+
+.modal h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: var(--dark-color);
+}
+
+.form-group {
+    margin-bottom: 1.2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+form button {
+    width: 100%;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.8rem;
+    font-size: 1rem;
+    margin-top: 1rem;
+}
+
+form button:hover {
+    background-color: var(--secondary-color);
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.form-footer a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    nav ul {
+        margin: 1rem 0;
+        gap: 1rem;
+    }
+
+    .hero {
+        padding: 0 2rem;
+        height: 50vh;
+    }
+
+    .hero h2 {
+        font-size: 2rem;
+    }
+
+    .medicines-grid, .categories-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .auth-buttons {
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 1rem;
+    }
+
+    .hero {
+        padding: 0 1rem;
+        height: 40vh;
+    }
+
+    .hero h2 {
+        font-size: 1.5rem;
+    }
+
+    .filter-options {
+        flex-direction: column;
+    }
+
+    .medicines-grid, .categories-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* Cart Item Styles */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-item-name {
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+}
+
+.cart-item-price {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.cart-item-quantity {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.cart-item-quantity button {
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cart-item-quantity button:hover {
+    background-color: #e0e0e0;
+}
+
+.cart-item-remove {
+    color: #ff4444;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+.empty-cart {
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+}
+
+.empty-cart i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #ddd;
+}
+</style>
+<body>
+    <header>
+        <div class="logo">
+            <i class="fas fa-pills"></i>
+            <h1>MediPlus</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#medicines">Medicines</a></li>
+                <li><a href="#categories">Categories</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <button id="loginBtn">Login</button>
+            <button id="signupBtn">Sign Up</button>
+            <div class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </div>
+            <div class="user-profile hidden">
+                <i class="fas fa-user-circle"></i>
+                <span class="username">User</span>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Your Health, Our Priority</h2>
+                <p>Get authentic medicines delivered to your doorstep</p>
+                <button class="shop-now">Shop Now</button>
+            </div>
+        </section>
+
+        <section id="medicines" class="medicines-section">
+            <h2>Our Medicines</h2>
+            <div class="search-bar">
+                <input type="text" placeholder="Search medicines...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            <div class="filter-options">
+                <select id="categoryFilter">
+                    <option value="all">All Categories</option>
+                    <option value="pain">Pain Relief</option>
+                    <option value="fever">Fever & Cold</option>
+                    <option value="allergy">Allergy</option>
+                    <option value="digestive">Digestive Health</option>
+                    <option value="vitamins">Vitamins & Supplements</option>
+                </select>
+                <select id="priceFilter">
+                    <option value="all">All Prices</option>
+                    <option value="0-100">Under ₹100</option>
+                    <option value="100-500">₹100 - ₹500</option>
+                    <option value="500-1000">₹500 - ₹1000</option>
+                    <option value="1000+">Over ₹1000</option>
+                </select>
+            </div>
+            <div class="medicines-grid" id="medicinesGrid">
+                <!-- Medicines will be loaded here via JavaScript -->
+            </div>
+        </section>
+
+        <section id="categories" class="categories-section">
+            <h2>Shop by Category</h2>
+            <div class="categories-grid">
+                <div class="category-card" data-category="pain">
+                    <i class="fas fa-head-side-virus"></i>
+                    <h3>Pain Relief</h3>
+                </div>
+                <div class="category-card" data-category="fever">
+                    <i class="fas fa-temperature-high"></i>
+                    <h3>Fever & Cold</h3>
+                </div>
+                <div class="category-card" data-category="allergy">
+                    <i class="fas fa-allergies"></i>
+                    <h3>Allergy</h3>
+                </div>
+                <div class="category-card" data-category="digestive">
+                    <i class="fas fa-stomach"></i>
+                    <h3>Digestive Health</h3>
+                </div>
+                <div class="category-card" data-category="vitamins">
+                    <i class="fas fa-capsules"></i>
+                    <h3>Vitamins</h3>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#medicines">Medicines</a></li>
+                    <li><a href="#categories">Categories</a></li>
+                    <li><a href="#about">About Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Health Street, Medical City</p>
+                <p><i class="fas fa-phone"></i> +1 234 567 890</p>
+                <p><i class="fas fa-envelope"></i> info@medicare.com</p>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2023 MediCare. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit">Login</button>
+                <p class="form-footer">Don't have an account? <a href="#" id="switchToSignup">Sign up</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signupModal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Sign Up</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">Full Name</label>
+                    <input type="text" id="signupName" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupConfirmPassword">Confirm Password</label>
+                    <input type="password" id="signupConfirmPassword" required>
+                </div>
+                <button type="submit">Sign Up</button>
+                <p class="form-footer">Already have an account? <a href="#" id="switchToLogin">Login</a></p>
+            </form>
+        </div>
+    </div>
+    <!-- Add this modal just before the closing </body> tag -->
+<!-- Cart Modal -->
+<div class="modal" id="cartModal">
+    <div class="modal-content" style="max-width: 600px;">
+        <span class="close-btn">&times;</span>
+        <h2>Your Cart</h2>
+        <div id="cartItems" style="max-height: 400px; overflow-y: auto; margin-bottom: 1rem;">
+            <!-- Cart items will be loaded here -->
+        </div>
+        <div style="border-top: 1px solid #eee; padding-top: 1rem;">
+            <p style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.2rem;">
+                <span>Total:</span>
+                <span id="cartTotal">₹0</span>
+            </p>
+            <button id="checkoutBtn" style="width: 100%; padding: 1rem; font-size: 1.1rem;">Proceed to Checkout</button>
+        </div>
+    </div>
+</div>
+
+<!-- Order Confirmation Modal -->
+<div class="modal" id="orderConfirmationModal">
+    <div class="modal-content" style="text-align: center;">
+        <span class="close-btn">&times;</span>
+        <i class="fas fa-check-circle" style="font-size: 4rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+        <h2>Order Placed Successfully!</h2>
+        <p id="orderDetails" style="margin-bottom: 1.5rem;"></p>
+        <p>Thank you for shopping with MediPlus</p>
+        <button id="continueShoppingBtn" style="margin-top: 1.5rem;">Continue Shopping</button>
+    </div>
+</div>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    // DOM Elements
+    const loginBtn = document.getElementById('loginBtn');
+    const signupBtn = document.getElementById('signupBtn');
+    const loginModal = document.getElementById('loginModal');
+    const signupModal = document.getElementById('signupModal');
+    const closeBtns = document.querySelectorAll('.close-btn');
+    const switchToSignup = document.getElementById('switchToSignup');
+    const switchToLogin = document.getElementById('switchToLogin');
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    const medicinesGrid = document.getElementById('medicinesGrid');
+    const categoryFilter = document.getElementById('categoryFilter');
+    const priceFilter = document.getElementById('priceFilter');
+    const categoryCards = document.querySelectorAll('.category-card');
+    const cartCount = document.querySelector('.cart-count');
+    const userProfile = document.querySelector('.user-profile');
+    const authButtons = document.querySelector('.auth-buttons');
+    // Add these variables at the top with other DOM elements
+const cartModal = document.getElementById('cartModal');
+const cartItemsContainer = document.getElementById('cartItems');
+const cartTotal = document.getElementById('cartTotal');
+const checkoutBtn = document.getElementById('checkoutBtn');
+const orderConfirmationModal = document.getElementById('orderConfirmationModal');
+const orderDetails = document.getElementById('orderDetails');
+const continueShoppingBtn = document.getElementById('continueShoppingBtn');
+
+// Add this event listener with others
+document.querySelector('.cart-icon').addEventListener('click', function() {
+    if (cart.length === 0) {
+        alert('Your cart is empty');
+        return;
+    }
+    displayCart();
+    cartModal.style.display = 'flex';
+});
+
+// Add this function with other functions
+function displayCart() {
+    cartItemsContainer.innerHTML = '';
+    
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = `
+            <div class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <p>Your cart is empty</p>
+            </div>
+        `;
+        cartTotal.textContent = '₹0';
+        return;
+    }
+    
+    let total = 0;
+    
+    cart.forEach(item => {
+        const itemTotal = item.price * item.quantity;
+        total += itemTotal;
+        
+        const cartItem = document.createElement('div');
+        cartItem.className = 'cart-item';
+        cartItem.innerHTML = `
+            <div class="cart-item-info">
+                <div class="cart-item-name">${item.name}</div>
+                <div class="cart-item-price">₹${item.price} x ${item.quantity} = ₹${itemTotal}</div>
+            </div>
+            <div class="cart-item-quantity">
+                <button class="decrease-quantity" data-id="${item.id}">-</button>
+                <span>${item.quantity}</span>
+                <button class="increase-quantity" data-id="${item.id}">+</button>
+                <span class="cart-item-remove" data-id="${item.id}"><i class="fas fa-trash"></i></span>
+            </div>
+        `;
+        cartItemsContainer.appendChild(cartItem);
+    });
+    
+    cartTotal.textContent = `₹${total}`;
+    
+    // Add event listeners to quantity buttons
+    document.querySelectorAll('.decrease-quantity').forEach(button => {
+        button.addEventListener('click', function() {
+            const itemId = parseInt(this.getAttribute('data-id'));
+            updateCartItemQuantity(itemId, -1);
+        });
+    });
+    
+    document.querySelectorAll('.increase-quantity').forEach(button => {
+        button.addEventListener('click', function() {
+            const itemId = parseInt(this.getAttribute('data-id'));
+            updateCartItemQuantity(itemId, 1);
+        });
+    });
+    
+    document.querySelectorAll('.cart-item-remove').forEach(button => {
+        button.addEventListener('click', function() {
+            const itemId = parseInt(this.getAttribute('data-id'));
+            removeFromCart(itemId);
+        });
+    });
+}
+
+function updateCartItemQuantity(itemId, change) {
+    const itemIndex = cart.findIndex(item => item.id === itemId);
+    
+    if (itemIndex !== -1) {
+        cart[itemIndex].quantity += change;
+        
+        if (cart[itemIndex].quantity <= 0) {
+            cart.splice(itemIndex, 1);
+        }
+        
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+        displayCart();
+    }
+}
+
+function removeFromCart(itemId) {
+    const itemIndex = cart.findIndex(item => item.id === itemId);
+    
+    if (itemIndex !== -1) {
+        cart.splice(itemIndex, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+        displayCart();
+        
+        if (cart.length === 0) {
+            setTimeout(() => {
+                cartModal.style.display = 'none';
+            }, 500);
+        }
+    }
+}
+
+// Checkout functionality
+checkoutBtn.addEventListener('click', function() {
+    if (!currentUser) {
+        alert('Please login to proceed to checkout');
+        cartModal.style.display = 'none';
+        loginModal.style.display = 'flex';
+        return;
+    }
+    
+    const totalAmount = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+    
+    // In a real application, you would send this to your backend to create an order
+    // For this demo, we'll simulate it with Razorpay's test mode
+    
+    const options = {
+        key: 'rzp_test_1DP5mmOlF5G5ag', // Test API Key - replace with your own in production
+        amount: totalAmount * 100, // Razorpay expects amount in paise
+        currency: 'INR',
+        name: 'MediPlus',
+        description: 'Purchase of Medicines',
+        image: 'https://example.com/your_logo.jpg',
+        order_id: null, // This would come from your backend in a real app
+        handler: function(response) {
+            // This function runs after successful payment
+            // In a real app, you would verify the payment with your backend
+            placeOrder(response.razorpay_payment_id);
+        },
+        prefill: {
+            name: currentUser.name,
+            email: currentUser.email,
+            contact: '9999999999' // You would get this from user profile in a real app
+        },
+        notes: {
+            address: "Customer's address would go here"
+        },
+        theme: {
+            color: '#4CAF50'
+        }
+    };
+    
+    const rzp = new Razorpay(options);
+    rzp.open();
+    
+    rzp.on('payment.failed', function(response) {
+        alert('Payment failed. Please try again.');
+        console.error(response.error);
+    });
+});
+
+function placeOrder(paymentId) {
+    // In a real app, you would send this data to your backend
+    // For this demo, we'll just show a confirmation
+    
+    const orderNumber = 'ORD' + Date.now().toString().slice(-6);
+    const totalAmount = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
+    const itemsCount = cart.reduce((count, item) => count + item.quantity, 0);
+    
+    orderDetails.innerHTML = `
+        <p>Order #${orderNumber}</p>
+        <p>${itemsCount} items - ₹${totalAmount}</p>
+        <p>Payment ID: ${paymentId}</p>
+    `;
+    
+    // Clear the cart
+    cart = [];
+    localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
+    
+    // Show confirmation
+    cartModal.style.display = 'none';
+    orderConfirmationModal.style.display = 'flex';
+}
+
+continueShoppingBtn.addEventListener('click', function() {
+    orderConfirmationModal.style.display = 'none';
+});
+
+    // Sample user data (in a real app, this would be from a database)
+    let users = JSON.parse(localStorage.getItem('users')) || [];
+    let currentUser = JSON.parse(localStorage.getItem('currentUser')) || null;
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    // Sample medicine data
+    const medicines = [
+        {
+            id: 1,
+            name: 'Paracetamol 500mg',
+            description: 'For fever and pain relief',
+            price: 20,
+            category: 'fever',
+            image:"images/paracetmol.jpg"
+
+        },
+        {
+            id: 2,
+            name: 'Ibuprofen 400mg',
+            description: 'Anti-inflammatory pain reliever',
+            price: 45,
+            category: 'pain',
+            image: "images/ibuprofen.jpg"
+        },
+        {
+            id: 3,
+            name: 'Cetirizine 10mg',
+            description: 'For allergy relief',
+            price: 30,
+            category: 'allergy',
+            image: 'images/cetirizine.jpg'
+        },
+        {
+            id: 4,
+            name: 'Omeprazole 20mg',
+            description: 'For acid reflux and heartburn',
+            price: 80,
+            category: 'digestive',
+            image: 'images/omeprazole.jpg'
+        },
+        {
+            id: 5,
+            name: 'Vitamin C 500mg',
+            description: 'Immune system support',
+            price: 120,
+            category: 'vitamins',
+            image: 'images/vitamin-c.jpg'
+        },
+        {
+            id: 6,
+            name: 'Aspirin 75mg',
+            description: 'Blood thinner and pain relief',
+            price: 25,
+            category: 'pain',
+            image: 'images/aspirin.jpg'
+        },
+        {
+            id: 7,
+            name: 'Loratadine 10mg',
+            description: 'Non-drowsy allergy relief',
+            price: 50,
+            category: 'allergy',
+            image: 'images/loratadine.jpg'
+        },
+        {
+            id: 8,
+            name: 'Multivitamin Tablet',
+            description: 'Daily essential vitamins',
+            price: 150,
+            category: 'vitamins',
+            image: 'images/multivitamin.jpg'
+        }
+    ];
+
+    // Check if user is logged in
+    if (currentUser) {
+        authButtons.querySelector('button').style.display = 'none';
+        authButtons.querySelector('button:nth-child(2)').style.display = 'none';
+        userProfile.classList.remove('hidden');
+        userProfile.querySelector('.username').textContent = currentUser.name;
+    }
+
+    // Update cart count
+    updateCartCount();
+
+    // Display medicines
+    displayMedicines(medicines);
+
+    // Modal functionality
+    loginBtn.addEventListener('click', () => loginModal.style.display = 'flex');
+    signupBtn.addEventListener('click', () => signupModal.style.display = 'flex');
+
+    closeBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            this.closest('.modal').style.display = 'none';
+        });
+    });
+
+    switchToSignup.addEventListener('click', function(e) {
+        e.preventDefault();
+        loginModal.style.display = 'none';
+        signupModal.style.display = 'flex';
+    });
+
+    switchToLogin.addEventListener('click', function(e) {
+        e.preventDefault();
+        signupModal.style.display = 'none';
+        loginModal.style.display = 'flex';
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener('click', function(e) {
+        if (e.target === loginModal) loginModal.style.display = 'none';
+        if (e.target === signupModal) signupModal.style.display = 'none';
+    });
+
+    // Login form submission
+    loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = document.getElementById('loginEmail').value;
+        const password = document.getElementById('loginPassword').value;
+
+        const user = users.find(u => u.email === email && u.password === password);
+        
+        if (user) {
+            currentUser = user;
+            localStorage.setItem('currentUser', JSON.stringify(currentUser));
+            alert('Login successful!');
+            loginModal.style.display = 'none';
+            authButtons.querySelector('button').style.display = 'none';
+            authButtons.querySelector('button:nth-child(2)').style.display = 'none';
+            userProfile.classList.remove('hidden');
+            userProfile.querySelector('.username').textContent = currentUser.name;
+            loginForm.reset();
+        } else {
+            alert('Invalid email or password');
+        }
+    });
+
+    // Signup form submission
+    signupForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('signupName').value;
+        const email = document.getElementById('signupEmail').value;
+        const password = document.getElementById('signupPassword').value;
+        const confirmPassword = document.getElementById('signupConfirmPassword').value;
+
+        if (password !== confirmPassword) {
+            alert('Passwords do not match');
+            return;
+        }
+
+        if (users.some(u => u.email === email)) {
+            alert('Email already registered');
+            return;
+        }
+
+        const newUser = {
+            id: Date.now(),
+            name,
+            email,
+            password
+        };
+
+        users.push(newUser);
+        localStorage.setItem('users', JSON.stringify(users));
+        
+        alert('Registration successful! Please login.');
+        signupModal.style.display = 'none';
+        loginModal.style.display = 'flex';
+        signupForm.reset();
+    });
+
+    // Filter medicines
+    categoryFilter.addEventListener('change', filterMedicines);
+    priceFilter.addEventListener('change', filterMedicines);
+
+    // Filter by category cards
+    categoryCards.forEach(card => {
+        card.addEventListener('click', function() {
+            const category = this.getAttribute('data-category');
+            categoryFilter.value = category;
+            filterMedicines();
+        });
+    });
+
+    // User profile click
+    userProfile.addEventListener('click', function() {
+        if (confirm('Do you want to logout?')) {
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            authButtons.querySelector('button').style.display = 'block';
+            authButtons.querySelector('button:nth-child(2)').style.display = 'block';
+            userProfile.classList.add('hidden');
+        }
+    });
+
+    // Functions
+    function displayMedicines(meds) {
+        medicinesGrid.innerHTML = '';
+        meds.forEach(medicine => {
+            const medicineCard = document.createElement('div');
+            medicineCard.className = 'medicine-card';
+            medicineCard.innerHTML = `
+                <div class="medicine-img">
+                    <img src="${medicine.image}" alt="${medicine.name}" style="height: 100%; width: auto; max-width: 100%;" onerror="this.onerror=null;this.src='images/default.jpg';" />
+                </div>
+                <div class="medicine-info">
+                    <h3>${medicine.name}</h3>
+                    <p>${medicine.description}</p>
+                    <span class="medicine-price">₹${medicine.price}</span>
+                    <button class="add-to-cart" data-id="${medicine.id}">Add to Cart</button>
+                </div>
+            `;
+            medicinesGrid.appendChild(medicineCard);
+        });
+    
+        // Add to cart functionality
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function () {
+                if (!currentUser) {
+                    alert('Please login to add items to cart');
+                    loginModal.style.display = 'flex';
+                    return;
+                }
+    
+                const medicineId = parseInt(this.getAttribute('data-id'));
+                const medicine = medicines.find(m => m.id === medicineId);
+    
+                const existingItem = cart.find(item => item.id === medicineId);
+    
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        ...medicine,
+                        quantity: 1
+                    });
+                }
+    
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartCount();
+                alert(`${medicine.name} added to cart`);
+            });
+        });
+    }
+    
+
+    function filterMedicines() {
+        const category = categoryFilter.value;
+        const priceRange = priceFilter.value;
+        
+        let filtered = [...medicines];
+        
+        // Filter by category
+        if (category !== 'all') {
+            filtered = filtered.filter(medicine => medicine.category === category);
+        }
+        
+        // Filter by price
+        if (priceRange !== 'all') {
+            const [min, max] = priceRange.split('-').map(Number);
+            
+            if (priceRange.endsWith('+')) {
+                filtered = filtered.filter(medicine => medicine.price >= 1000);
+            } else {
+                filtered = filtered.filter(medicine => medicine.price >= min && medicine.price <= max);
+            }
+        }
+        
+        displayMedicines(filtered);
+    }
+
+    function updateCartCount() {
+        const count = cart.reduce((total, item) => total + item.quantity, 0);
+        cartCount.textContent = count;
+    }
+});
+    </script>
+</body>
+</html>
